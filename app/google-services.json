@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "611912130198",
+    "firebase_url": "https://perpustakaan-digital.firebaseio.com",
+    "project_id": "perpustakaan-digital",
+    "storage_bucket": "perpustakaan-digital.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:611912130198:android:e8ad06b180f4b1d1",
+        "android_client_info": {
+          "package_name": "com.a201381061.digitallearning"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "611912130198-dvgda5d0h5v67ktqf03crj50jd2b4bb5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.a201381061.digitallearning",
+            "certificate_hash": "5ccc77557f4c927f883e3b9466e43ace17c3e099"
+          }
+        },
+        {
+          "client_id": "611912130198-4thhhpn3c0k5ohbl7ncnkv2nqss949g8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOCYer6dEFOzSAWWwTD_lFOn1BESIGiFg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "611912130198-4thhhpn3c0k5ohbl7ncnkv2nqss949g8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
