@@ -28,7 +28,7 @@ import com.a201381061.digitallearning.NewPostModule.Activity.NewPostActivity;
 import com.a201381061.digitallearning.R;
 import com.a201381061.digitallearning.LoginModule.Utility.FirebaseAuthUtil;
 
-public class MainActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity{
 
     //Navigation Drawer
     private NavigationView navigationView;
@@ -71,6 +71,12 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
         castingElement();
         fabClicked();
         setUpNavigationDrawer();
+
+        if (savedInstanceState == null) {
+            navItemIndex = 0;
+            CURRENT_TAG = TAG_HOME;
+            loadHomeFragment();
+        }
     }
 
     private void castingElement(){
@@ -94,7 +100,6 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
 
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         navigationView = (NavigationView)findViewById(R.id.nav_view);
-        navHeader = navigationView.getHeaderView(0);
 
         //set data di header
         loadHeader();
@@ -105,10 +110,11 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
 
     private void loadHeader(){
         fbUtil = new FirebaseHomeUtil();
-        textViewHeaderName = (TextView)findViewById(R.id.drawer_header_name);
-        imageViewImage = (ImageView)findViewById(R.id.drawer_header_image);
+        navHeader = navigationView.getHeaderView(0);
+        textViewHeaderName = (TextView)navHeader.findViewById(R.id.drawer_header_name);
+        imageViewImage = (ImageView)navHeader.findViewById(R.id.drawer_header_image);
 
-        //textViewHeaderName.setText(fbUtil.getFirebaseUserName());
+        textViewHeaderName.setText(fbUtil.getFirebaseUserName());
     }
 
     private void setUpNavigationMenu(){
@@ -121,6 +127,8 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
                         CURRENT_TAG = TAG_HOME;
                         break;
                     case R.id.nav_new_post:
+                        navItemIndex = 0;
+                        CURRENT_TAG = TAG_HOME;
                         startActivity(new Intent(MainActivity.this, NewPostActivity.class));
                         drawerLayout.closeDrawers();
                         return true;
@@ -150,6 +158,8 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
                 }
                 item.setChecked(true);
 
+                loadHomeFragment();
+
                 return true;
                 }
         });
@@ -175,7 +185,6 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
         //calling sync state is necessary or else your hamburger icon wont show up
         actionBarDrawerToggle.syncState();
 
-        loadHomeFragment();
     }
 
     private void loadHomeFragment() {
@@ -286,8 +295,4 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
         super.onBackPressed();
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
 }
