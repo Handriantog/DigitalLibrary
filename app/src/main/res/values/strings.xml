@@ -35,6 +35,13 @@
     <string name="edit_text_lokasi_kampus">Lokasi Kampus</string>
     <string name="button_register">register</string>
 
+    <!--Halaman New Post-->
+    <string name="edit_text_judul">Judul Post</string>
+    <string name="edit_text_kategori">Kategori</string>
+    <string name="edit_text_isi_post">Isi Post</string>
+    <string name="button_post">Post</string>
+    <string name="button_insert_file">Pilih File</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -26,61 +26,61 @@ public class FirebaseAuthUtil {
     private FirebaseUser mUser;
     private DatabaseReference firebaseDatabase;
 
-    public FirebaseAuthUtil(){
+    public FirebaseAuthUtil() {
         mAuth = FirebaseAuth.getInstance();
     }
 
-    public boolean checkIfUserExist(){
+    public boolean checkIfUserExist() {
         mUser = mAuth.getCurrentUser();
-        if(mUser==null){
+        if (mUser == null) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }
 
-    public void signInUser(String email, String password, final Activity activity){
-        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
+    public void signInUser(String email, String password, final Activity activity) {
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    Log.d(TAG,"Login Success");
-                    ((LoginActivity)activity).signInSuccess();
-                }else{
-                    Log.d(TAG,"Register Failed");
-                    Log.e(TAG,task.getException().getMessage());
-                    ((LoginActivity)activity).signInFailed();
+                if (task.isSuccessful()) {
+                    Log.d(TAG, "Login Success");
+                    ((LoginActivity) activity).signInSuccess();
+                } else {
+                    Log.d(TAG, "Register Failed");
+                    Log.e(TAG, task.getException().getMessage());
+                    ((LoginActivity) activity).signInFailed();
                 }
             }
         });
     }
 
-    public void registerNewUser(final String nama,final String email,final String password,final String kampus, final Activity activity){
-        mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
+    public void registerNewUser(final String nama, final String email, final String password, final String kampus, final String fakultas, final Activity activity) {
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    Log.d(TAG,"Register Success");
-                    writeNewUser(task.getResult().getUser().getUid(),nama,email,password,kampus);
-                    ((RegisterActivity)activity).registerSuccess();
-                }else{
-                    Log.d(TAG,"Register Failed");
-                    Log.e(TAG,task.getException().getMessage());
-                    ((RegisterActivity)activity).registerFailed();
+                if (task.isSuccessful()) {
+                    Log.d(TAG, "Register Success");
+                    writeNewUser(task.getResult().getUser().getUid(), nama, email, password, kampus, fakultas);
+                    ((RegisterActivity) activity).registerSuccess();
+                } else {
+                    Log.d(TAG, "Register Failed");
+                    Log.e(TAG, task.getException().getMessage());
+                    ((RegisterActivity) activity).registerFailed();
                 }
             }
         });
     }
 
-    private void writeNewUser(String id,String nama, String email, String password, String kampus){
+    private void writeNewUser(String id, String nama, String email, String password, String kampus, String fakultas) {
         databaseSetup();
 
-        User user = new User(nama,email,password,kampus);
+        User user = new User(nama, email, password, kampus, fakultas);
         firebaseDatabase.child("user").child(id).setValue(user);
 
     }
 
-    private void databaseSetup(){
+    private void databaseSetup() {
         firebaseDatabase = FirebaseDatabase.getInstance().getReference();
     }
 

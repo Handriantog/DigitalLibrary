@@ -3,35 +3,69 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/editTextNamaRegister"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/inputLayoutNamaRegister"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/edit_text_nama" />
+        android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/editTextEmailRegister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/edit_text_email"
-        android:inputType="textEmailAddress" />
+        <EditText
+            android:id="@+id/editTextNamaRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/edit_text_nama" />
 
-    <EditText
-        android:id="@+id/editTextPasswordRegister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/edit_text_password"
-        android:inputType="textPassword" />
+    </android.support.design.widget.TextInputLayout>
 
-    <EditText
-        android:id="@+id/editTextLokasiKampusRegister"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/inputLayoutEmailRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/editTextEmailRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/edit_text_email"
+            android:inputType="textEmailAddress" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/inputLayoutPasswordRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/editTextPasswordRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/edit_text_password"
+            android:inputType="textPassword" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/inputLayoutKampusRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/editTextLokasiKampusRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/edit_text_lokasi_kampus" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/edit_text_lokasi_kampus" />
+        android:id="@+id/spinnerFakultasRegister"/>
 
     <Button
         android:id="@+id/buttonRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_register" />
+
 </LinearLayout>

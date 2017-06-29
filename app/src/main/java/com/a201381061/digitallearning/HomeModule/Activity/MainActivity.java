@@ -26,7 +26,6 @@ import com.a201381061.digitallearning.HomeModule.Utility.FirebaseHomeUtil;
 import com.a201381061.digitallearning.LoginModule.Activity.LoginActivity;
 import com.a201381061.digitallearning.NewPostModule.Activity.NewPostActivity;
 import com.a201381061.digitallearning.R;
-import com.a201381061.digitallearning.LoginModule.Utility.FirebaseAuthUtil;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -127,8 +126,7 @@ public class MainActivity extends AppCompatActivity{
                         CURRENT_TAG = TAG_HOME;
                         break;
                     case R.id.nav_new_post:
-                        navItemIndex = 0;
-                        CURRENT_TAG = TAG_HOME;
+                        navigationView.setCheckedItem(R.id.menu_none);
                         startActivity(new Intent(MainActivity.this, NewPostActivity.class));
                         drawerLayout.closeDrawers();
                         return true;
@@ -291,7 +289,6 @@ public class MainActivity extends AppCompatActivity{
                 return;
             }
         }
-
         super.onBackPressed();
     }
 

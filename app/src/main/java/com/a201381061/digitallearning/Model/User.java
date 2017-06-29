@@ -10,15 +10,17 @@ public class User {
     private String email;
     private String password;
     private String kampus;
+    private String fakultas;
 
     public User() {
     }
 
-    public User(String nama, String email, String password, String kampus) {
+    public User(String nama, String email, String password, String kampus, String fakultas) {
         this.nama = nama;
         this.email = email;
         this.password = password;
         this.kampus = kampus;
+        this.fakultas = fakultas;
     }
 
     public String getNama() {
@@ -51,5 +53,13 @@ public class User {
 
     public void setKampus(String kampus) {
         this.kampus = kampus;
+    }
+
+    public String getFakultas() {
+        return fakultas;
+    }
+
+    public void setFakultas(String fakultas) {
+        this.fakultas = fakultas;
     }
 }

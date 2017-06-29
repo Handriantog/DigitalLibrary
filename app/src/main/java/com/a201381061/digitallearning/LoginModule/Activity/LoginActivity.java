@@ -97,5 +97,9 @@ public class LoginActivity extends BaseActivity {
         str_password = editTextPassword.getText().toString();
     }
 
+    public void registerSucced(){
+        finish();
+    }
+
 
 }
