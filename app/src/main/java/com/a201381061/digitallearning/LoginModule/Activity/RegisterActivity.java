@@ -80,7 +80,7 @@ public class RegisterActivity extends BaseActivity {
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(ACTIVITY_TAG, "User Register");
+                Log.d(ACTIVITY_TAG, "UserModel Register");
                 if (validateForm()) {
                     showProgressDialog();
                     fb = new FirebaseAuthUtil();
@@ -96,7 +96,7 @@ public class RegisterActivity extends BaseActivity {
         hideProgressDialog();
         Toast.makeText(getApplicationContext(), "Registrasi Berhasil", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(RegisterActivity.this,MainActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i);
         finish();
     }

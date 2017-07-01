@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.a201381061.digitallearning.R;
 
 /**
- * Created by User on 6/18/2017.
+ * Created by UserModel on 6/18/2017.
  */
 
 public class BaseActivity extends AppCompatActivity {

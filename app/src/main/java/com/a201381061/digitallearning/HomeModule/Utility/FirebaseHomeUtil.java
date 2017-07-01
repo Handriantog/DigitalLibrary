@@ -5,7 +5,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 
 /**
- * Created by User on 6/23/2017.
+ * Created by UserModel on 6/23/2017.
  */
 
 public class FirebaseHomeUtil {
@@ -29,6 +29,7 @@ public class FirebaseHomeUtil {
         name = mAuth.getCurrentUser().getDisplayName();
         return name;
     }
+
 
     public void signOut(){
         mAuth.signOut();

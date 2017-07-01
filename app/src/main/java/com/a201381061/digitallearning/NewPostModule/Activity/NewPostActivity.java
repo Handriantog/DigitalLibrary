@@ -9,11 +9,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.a201381061.digitallearning.NewPostModule.Utility.FirebaseNewPostUtil;
 import com.a201381061.digitallearning.R;
+import com.a201381061.digitallearning.Utils.BaseActivity;
 
-public class NewPostActivity extends AppCompatActivity {
+public class NewPostActivity extends BaseActivity {
 
     private EditText editTextJudul;
     private EditText editTextKategori;
@@ -40,16 +42,6 @@ public class NewPostActivity extends AppCompatActivity {
         postMateri();
     }
 
-    private void postMateri(){
-        buttonPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                newPostUtil = new FirebaseNewPostUtil(NewPostActivity.this);
-                newPostUtil.addNewPost(str_judul,str_kategori,str_isi);
-            }
-        });
-    }
-
     private void castingElement() {
         editTextJudul = (EditText) findViewById(R.id.editTextJudulPost);
         editTextKategori = (EditText) findViewById(R.id.editTextKategoriPost);
@@ -69,6 +61,17 @@ public class NewPostActivity extends AppCompatActivity {
         editTextJudul.addTextChangedListener(new MyEditTextListener(editTextJudul));
         editTextKategori.addTextChangedListener(new MyEditTextListener(editTextKategori));
         editTextIsi.addTextChangedListener(new MyEditTextListener(editTextIsi));
+    }
+
+    private void postMateri(){
+        buttonPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showProgressDialog();
+                newPostUtil = new FirebaseNewPostUtil(NewPostActivity.this);
+                newPostUtil.addNewPost(str_judul,str_kategori,str_isi);
+            }
+        });
     }
 
     private boolean validateJudul() {
@@ -96,7 +99,7 @@ public class NewPostActivity extends AppCompatActivity {
     private boolean validateIsi() {
         str_isi = editTextIsi.getText().toString();
         if (str_isi.equals("")) {
-            inputLayoutIsi.setError("Masukkan Isi Post");
+            inputLayoutIsi.setError("Masukkan Isi PostModel");
             return false;
         } else {
             inputLayoutIsi.setErrorEnabled(false);
@@ -137,5 +140,11 @@ public class NewPostActivity extends AppCompatActivity {
                     break;
             }
         }
+    }
+
+    public void postSelesai(){
+        hideProgressDialog();
+        Toast.makeText(NewPostActivity.this,"PostModel Berhasil",Toast.LENGTH_SHORT).show();
+        finish();
     }
 }

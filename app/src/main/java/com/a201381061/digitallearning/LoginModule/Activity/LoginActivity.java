@@ -47,7 +47,7 @@ public class LoginActivity extends BaseActivity {
         textViewRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(ACTIVITY_TAG,"User Register");
+                Log.d(ACTIVITY_TAG,"UserModel Register");
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             }
         });
@@ -59,7 +59,7 @@ public class LoginActivity extends BaseActivity {
             public void onClick(View v) {
                 showProgressDialog();
                 if(validateForm()){
-                    Log.d(ACTIVITY_TAG,"User Login");
+                    Log.d(ACTIVITY_TAG,"UserModel Login");
                     getLoginData();
                     fb = new FirebaseAuthUtil();
                     fb.signInUser(str_email,str_password,LoginActivity.this);

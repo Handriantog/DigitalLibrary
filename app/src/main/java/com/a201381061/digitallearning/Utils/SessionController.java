@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 import java.util.HashMap;
 
 /**
- * Created by User on 6/29/2017.
+ * Created by UserModel on 6/29/2017.
  */
 
 public class SessionController {
@@ -28,16 +28,16 @@ public class SessionController {
     // All Shared Preferences Keys
     private static final String IS_LOGIN = "IsLoggedIn";
 
-    // User name
+    // UserModel name
     private static final String KEY_NAME = "nama";
 
     // Email address
     private static final String KEY_EMAIL = "email";
 
-    // Fakultas User
+    // Fakultas UserModel
     private static final String KEY_FAKULTAS = "fakultas";
 
-    //Kampus User
+    //Kampus UserModel
     private static final String KEY_KAMPUS = "kampus";
 
     // Constructor

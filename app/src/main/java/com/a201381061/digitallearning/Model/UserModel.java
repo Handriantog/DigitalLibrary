@@ -1,10 +1,10 @@
 package com.a201381061.digitallearning.Model;
 
 /**
- * Created by User on 6/21/2017.
+ * Created by UserModel on 6/21/2017.
  */
 
-public class User {
+public class UserModel {
 
     private String nama;
     private String email;
@@ -12,10 +12,10 @@ public class User {
     private String kampus;
     private String fakultas;
 
-    public User() {
+    public UserModel() {
     }
 
-    public User(String nama, String email, String password, String kampus, String fakultas) {
+    public UserModel(String nama, String email, String password, String kampus, String fakultas) {
         this.nama = nama;
         this.email = email;
         this.password = password;
