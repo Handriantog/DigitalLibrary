@@ -34,6 +34,7 @@
     <string name="edit_text_nama">Nama</string>
     <string name="edit_text_lokasi_kampus">Lokasi Kampus</string>
     <string name="button_register">register</string>
+    <string name="text_view_fakultas">Pilih Fakultas</string>
 
     <!--Halaman New Post-->
     <string name="edit_text_judul">Judul Post</string>

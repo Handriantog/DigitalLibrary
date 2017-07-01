@@ -7,11 +7,14 @@ import android.util.Log;
 import com.a201381061.digitallearning.LoginModule.Activity.RegisterActivity;
 import com.a201381061.digitallearning.LoginModule.Activity.LoginActivity;
 import com.a201381061.digitallearning.Model.User;
+import com.a201381061.digitallearning.Utils.Constant;
+import com.a201381061.digitallearning.Utils.SessionController;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -61,6 +64,8 @@ public class FirebaseAuthUtil {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     Log.d(TAG, "Register Success");
+                    SessionController sessionController = new SessionController(activity);
+                    sessionController.createLoginSession(nama,email,kampus,fakultas);
                     writeNewUser(task.getResult().getUser().getUid(), nama, email, password, kampus, fakultas);
                     ((RegisterActivity) activity).registerSuccess();
                 } else {
@@ -72,17 +77,17 @@ public class FirebaseAuthUtil {
         });
     }
 
-    private void writeNewUser(String id, String nama, String email, String password, String kampus, String fakultas) {
-        databaseSetup();
-
-        User user = new User(nama, email, password, kampus, fakultas);
-        firebaseDatabase.child("user").child(id).setValue(user);
-
-    }
-
     private void databaseSetup() {
         firebaseDatabase = FirebaseDatabase.getInstance().getReference();
     }
+
+    private void writeNewUser(String id, String nama, String email, String password, String kampus, String fakultas) {
+        databaseSetup();
+        User user = new User(nama, email, password, kampus, fakultas);
+        firebaseDatabase.child("user").child(id).setValue(user);
+    }
+
+
 
 
 }

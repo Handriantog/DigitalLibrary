@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.a201381061.digitallearning.NewPostModule.Utility.FirebaseNewPostUtil;
 import com.a201381061.digitallearning.R;
 
 public class NewPostActivity extends AppCompatActivity {
@@ -29,11 +30,24 @@ public class NewPostActivity extends AppCompatActivity {
     private String str_kategori;
     private String str_isi;
 
+    private FirebaseNewPostUtil newPostUtil;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_post);
         castingElement();
+        postMateri();
+    }
+
+    private void postMateri(){
+        buttonPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                newPostUtil = new FirebaseNewPostUtil(NewPostActivity.this);
+                newPostUtil.addNewPost(str_judul,str_kategori,str_isi);
+            }
+        });
     }
 
     private void castingElement() {

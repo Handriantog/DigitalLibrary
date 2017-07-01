@@ -19,7 +19,12 @@ import com.a201381061.digitallearning.HomeModule.Activity.MainActivity;
 import com.a201381061.digitallearning.LoginModule.Utility.FirebaseAuthUtil;
 import com.a201381061.digitallearning.R;
 import com.a201381061.digitallearning.Utils.BaseActivity;
-import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
+
+import org.angmarch.views.NiceSpinner;
+
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class RegisterActivity extends BaseActivity {
 
@@ -27,7 +32,7 @@ public class RegisterActivity extends BaseActivity {
     private EditText editTextEmail;
     private EditText editTextPassword;
     private EditText editTextKampus;
-    private MaterialBetterSpinner spinnerFakultas;
+    private NiceSpinner spinnerFakultas;
     private Button buttonRegister;
 
     private TextInputLayout inputLayoutNama;
@@ -41,11 +46,10 @@ public class RegisterActivity extends BaseActivity {
     private String str_email;
     private String str_password;
     private String str_kampus;
-    private String str_fakultas;
+    private String str_fakultas = "Ilmu Komputer";
 
 
-    private static final String[] FAKULTAS = new String[]{
-            "Ilmu Komputer", "Ekonomi", "Psikologi"};
+    List<String> FAKULTAS = new LinkedList<>(Arrays.asList("Ilmu Komputer", "Ekonomi", "Psikologi", "Hukum"));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +64,7 @@ public class RegisterActivity extends BaseActivity {
         editTextEmail = (EditText) findViewById(R.id.editTextEmailRegister);
         editTextPassword = (EditText) findViewById(R.id.editTextPasswordRegister);
         editTextKampus = (EditText) findViewById(R.id.editTextLokasiKampusRegister);
-        spinnerFakultas = (MaterialBetterSpinner) findViewById(R.id.spinnerFakultasRegister);
+        spinnerFakultas = (NiceSpinner) findViewById(R.id.spinnerFakultasRegister);
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
 
         inputLayoutNama = (TextInputLayout) findViewById(R.id.inputLayoutNamaRegister);
@@ -77,10 +81,12 @@ public class RegisterActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Log.d(ACTIVITY_TAG, "User Register");
-                showProgressDialog();
                 if (validateForm()) {
+                    showProgressDialog();
                     fb = new FirebaseAuthUtil();
                     fb.registerNewUser(str_nama, str_email, str_password, str_kampus, str_fakultas, RegisterActivity.this);
+                } else {
+                    Toast.makeText(RegisterActivity.this, "Form Belum Lengkap", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -89,8 +95,9 @@ public class RegisterActivity extends BaseActivity {
     public void registerSuccess() {
         hideProgressDialog();
         Toast.makeText(getApplicationContext(), "Registrasi Berhasil", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(RegisterActivity.this, MainActivity.class));
-        ((LoginActivity) getApplicationContext()).registerSucced();
+        Intent i = new Intent(RegisterActivity.this,MainActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
         finish();
     }
 
@@ -102,15 +109,23 @@ public class RegisterActivity extends BaseActivity {
         if (validateNama() && validateEmail() && validatePassword() && validateKampus() && validateFakultas()) {
             return true;
         } else {
-            Toast.makeText(RegisterActivity.this, "Form Belum Lengkap", Toast.LENGTH_SHORT).show();
             return false;
         }
     }
 
     private void setUpSpinner() {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line, FAKULTAS);
-        spinnerFakultas.setAdapter(adapter);
+        spinnerFakultas.attachDataSource(FAKULTAS);
+        spinnerFakultas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                str_fakultas = FAKULTAS.get(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 
 
@@ -151,7 +166,7 @@ public class RegisterActivity extends BaseActivity {
     private boolean validatePassword() {
         str_password = editTextPassword.getText().toString();
         if (str_password.equals("")) {
-            inputLayoutEmail.setError("Masukkan Password");
+            inputLayoutPassword.setError("Masukkan Password");
             requestFocus(inputLayoutPassword);
             return false;
         } else if (str_password.length() < 6) {
@@ -171,29 +186,17 @@ public class RegisterActivity extends BaseActivity {
             requestFocus(inputLayoutKampus);
             return false;
         } else {
-            inputLayoutPassword.setErrorEnabled(false);
+            inputLayoutKampus.setErrorEnabled(false);
             return true;
         }
     }
 
     private boolean validateFakultas() {
-        spinnerFakultas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                str_fakultas = FAKULTAS[i];
-                Log.e(ACTIVITY_TAG, str_fakultas);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-        if (str_fakultas.equals("")) {
+        if (str_fakultas == null) {
             Toast.makeText(RegisterActivity.this, "Pilih Fakultas", Toast.LENGTH_SHORT).show();
-            return true;
-        } else {
             return false;
+        } else {
+            return true;
         }
     }
 

@@ -7,5 +7,7 @@ package com.a201381061.digitallearning.Utils;
 public class Constant {
 
     public String FIREBASE_URL = "https://perpustakaan-digital.firebaseio.com/";
+    public String DB_POST = "post";
+    public String DB_USER = "user";
 
 }
