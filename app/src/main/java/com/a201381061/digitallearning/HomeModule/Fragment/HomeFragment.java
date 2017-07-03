@@ -32,6 +32,7 @@ public class HomeFragment extends Fragment {
     private List<PostModel> postModelList = new ArrayList<>();
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference dbReference;
+    private DatabaseReference dbReference1;
     private String FRAGMENT_TAG = "HomeFragment";
 
     @Override
@@ -71,13 +72,13 @@ public class HomeFragment extends Fragment {
         recyclerViewPost.setItemAnimator(new DefaultItemAnimator());
         recyclerViewPost.setAdapter(adapter);
 
-
     }
 
     private void getAllPostData() {
         dbReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                postModelList.clear();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     Log.e(FRAGMENT_TAG, dataSnapshot.getValue().toString());
                     PostModel post = dataSnapshot1.getValue(PostModel.class);
@@ -85,6 +86,7 @@ public class HomeFragment extends Fragment {
                     isiPost.setJudul(post.getJudul());
                     isiPost.setKategori(post.getKategori());
                     isiPost.setIsi(post.getIsi());
+                    isiPost.setPostId(dataSnapshot1.getKey());
 
                     postModelList.add(isiPost);
                 }
@@ -97,6 +99,7 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
 
     private void getAllListURL() {
         SessionController sessionController = new SessionController(getActivity());

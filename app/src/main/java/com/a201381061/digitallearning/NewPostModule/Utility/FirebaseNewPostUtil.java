@@ -46,10 +46,10 @@ public class FirebaseNewPostUtil {
     public void addNewPost(String judul,String kategori,String isi){
         databaseSetup();
 
-        NewPostModel newPost = new NewPostModel(judul,isi,getUserId());
+        NewPostModel newPost = new NewPostModel(judul,isi,getUserId(),kategori,0,0);
         String idPost = firebaseDatabase.push().getKey();
         Log.e("ID POST",idPost);
-        firebaseDatabase.child(new Constant().DB_POST).child(getFakultas()).child(kategori).child(idPost).setValue(newPost, new DatabaseReference.CompletionListener() {
+        firebaseDatabase.child(new Constant().DB_POST).child(getFakultas()).child(idPost).setValue(newPost, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                 ((NewPostActivity)context).postSelesai();
