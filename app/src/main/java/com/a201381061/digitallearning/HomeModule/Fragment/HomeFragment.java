@@ -32,7 +32,6 @@ public class HomeFragment extends Fragment {
     private List<PostModel> postModelList = new ArrayList<>();
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference dbReference;
-    private DatabaseReference dbReference1;
     private String FRAGMENT_TAG = "HomeFragment";
 
     @Override

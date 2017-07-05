@@ -21,7 +21,8 @@
         <activity android:name=".LoginModule.Activity.RegisterActivity" />
         <activity android:name=".HomeModule.Activity.MainActivity" />
         <activity android:name=".NewPostModule.Activity.NewPostActivity" />
-        <activity android:name=".PostModule.Activity.InsidePostActivity"></activity>
+        <activity
+            android:name=".PostModule.Activity.InsidePostActivity"/>
     </application>
 
 </manifest>
