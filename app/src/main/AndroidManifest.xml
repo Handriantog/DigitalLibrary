@@ -21,8 +21,8 @@
         <activity android:name=".LoginModule.Activity.RegisterActivity" />
         <activity android:name=".HomeModule.Activity.MainActivity" />
         <activity android:name=".NewPostModule.Activity.NewPostActivity" />
-        <activity
-            android:name=".PostModule.Activity.InsidePostActivity"/>
+        <activity android:name=".PostModule.Activity.InsidePostActivity"/>
+        <activity android:name="com.a201381061.digitallearning.AppIntroModule.Activity.IntroActivity"/>
     </application>
 
 </manifest>

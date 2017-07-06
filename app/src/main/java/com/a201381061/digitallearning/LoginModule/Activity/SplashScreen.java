@@ -5,9 +5,11 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.a201381061.digitallearning.AppIntroModule.Activity.IntroActivity;
 import com.a201381061.digitallearning.HomeModule.Activity.MainActivity;
 import com.a201381061.digitallearning.LoginModule.Utility.FirebaseAuthUtil;
 import com.a201381061.digitallearning.R;
+import com.a201381061.digitallearning.Utils.SessionController;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -23,16 +25,27 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if(userExist){
-                    Intent i = new Intent(SplashScreen.this, MainActivity.class);
+                if(getFirstTimeOpened()){
+                    Intent i = new Intent(SplashScreen.this, IntroActivity.class);
                     startActivity(i);
                     finish();
                 }else{
-                    Intent i = new Intent(SplashScreen.this,LoginActivity.class);
-                    startActivity(i);
-                    finish();
+                    if(userExist){
+                        Intent i = new Intent(SplashScreen.this, MainActivity.class);
+                        startActivity(i);
+                        finish();
+                    }else{
+                        Intent i = new Intent(SplashScreen.this,LoginActivity.class);
+                        startActivity(i);
+                        finish();
+                    }
                 }
             }
         },WAKTU_TUNGGU);
+    }
+
+    private boolean getFirstTimeOpened(){
+        SessionController sessionController = new SessionController(SplashScreen.this);
+        return sessionController.firstTimeOpen();
     }
 }

@@ -37,6 +37,7 @@ public class FirebaseSeePostUtil {
     }
 
     private String getUserName(){
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         return firebaseUser.getDisplayName();
     }
 
@@ -47,7 +48,7 @@ public class FirebaseSeePostUtil {
     public void addNewComment(String isi,String url){
         databaseSetup();
 
-        Log.e(TAG,getUserName());
+        Log.e(TAG,getUserId());
 
         CommentModel comment = new CommentModel(getUserId(),getUserName(),isi);
 

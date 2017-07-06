@@ -40,6 +40,9 @@ public class SessionController {
     //Kampus UserModel
     private static final String KEY_KAMPUS = "kampus";
 
+    //First time open the app
+    private static final String FIRST_TIME = "firstTime";
+
     // Constructor
     public SessionController(Context context) {
         this._context = context;
@@ -70,7 +73,14 @@ public class SessionController {
         editor.commit();
     }
 
+    public boolean firstTimeOpen(){
+        return pref.getBoolean(FIRST_TIME,true);
+    }
 
+    public void openedForFirstTime(){
+        editor.putBoolean(FIRST_TIME,false);
+        editor.commit();
+    }
 
     public String getNama() {
         return pref.getString(KEY_NAME, null);

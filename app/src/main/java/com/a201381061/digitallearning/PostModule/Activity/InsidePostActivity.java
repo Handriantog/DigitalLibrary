@@ -22,6 +22,7 @@ import com.a201381061.digitallearning.PostModule.Utility.FirebaseSeePostUtil;
 import com.a201381061.digitallearning.R;
 import com.a201381061.digitallearning.Utils.BaseActivity;
 import com.a201381061.digitallearning.Utils.SessionController;
+import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -52,6 +53,7 @@ public class InsidePostActivity extends BaseActivity {
     private FirebaseSeePostUtil util;
 
     private RecyclerView recyclerView;
+    private RecyclerViewHeader recyclerViewHeader;
     private CommentAdapter adapter;
     private List<CommentModel> listComment = new ArrayList<>();
 
@@ -78,6 +80,7 @@ public class InsidePostActivity extends BaseActivity {
         bottomBar = (Toolbar) findViewById(R.id.bottomBarComment);
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerViewCommentInside);
+        recyclerViewHeader = (RecyclerViewHeader)findViewById(R.id.recyclerViewHeader);
 
         setUpToolbar();
 
@@ -121,6 +124,7 @@ public class InsidePostActivity extends BaseActivity {
         adapter = new CommentAdapter(listComment, InsidePostActivity.this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(InsidePostActivity.this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
+        recyclerViewHeader.attachTo(recyclerView);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
