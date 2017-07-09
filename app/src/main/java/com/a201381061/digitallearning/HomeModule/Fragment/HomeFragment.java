@@ -97,6 +97,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.e(FRAGMENT_TAG, "Failed to get Data" + databaseError.toException());
+                Log.e(FRAGMENT_TAG,"TES");
             }
         });
     }
