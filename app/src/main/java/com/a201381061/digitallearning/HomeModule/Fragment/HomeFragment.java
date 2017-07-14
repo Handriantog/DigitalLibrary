@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,11 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.a201381061.digitallearning.HomeModule.Utility.RecyclerViewAdapter;
+import com.a201381061.digitallearning.HomeModule.Utility.TakenMatkulAdapter;
+import com.a201381061.digitallearning.Model.MatkulModel;
 import com.a201381061.digitallearning.Model.PostModel;
 import com.a201381061.digitallearning.R;
 import com.a201381061.digitallearning.Utils.SessionController;
-import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,9 +28,9 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
     private RecyclerView recyclerViewPost;
-    private RecyclerViewAdapter adapter;
-    private String LIST_POST_URL;
-    private List<PostModel> postModelList = new ArrayList<>();
+    private TakenMatkulAdapter adapter;
+    private String LIST_TAKEN_MATKUL_URL;
+    private List<MatkulModel> takenMatkulList = new ArrayList<>();
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference dbReference;
     private String FRAGMENT_TAG = "HomeFragment";
@@ -63,11 +62,11 @@ public class HomeFragment extends Fragment {
 
     private void setUpDatabase() {
         firebaseDatabase = FirebaseDatabase.getInstance();
-        dbReference = firebaseDatabase.getReference(LIST_POST_URL);
+        dbReference = firebaseDatabase.getReference(LIST_TAKEN_MATKUL_URL);
 
-        getAllPostData();
+        getAllTakenMatkul();
 
-        adapter = new RecyclerViewAdapter(postModelList, getActivity());
+        adapter = new TakenMatkulAdapter(takenMatkulList, getActivity());
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerViewPost.setLayoutManager(layoutManager);
         recyclerViewPost.setItemAnimator(new DefaultItemAnimator());
@@ -75,21 +74,19 @@ public class HomeFragment extends Fragment {
 
     }
 
-    private void getAllPostData() {
+    private void getAllTakenMatkul() {
         dbReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                postModelList.clear();
+                takenMatkulList.clear();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     Log.e(FRAGMENT_TAG, dataSnapshot.getValue().toString());
-                    PostModel post = dataSnapshot1.getValue(PostModel.class);
-                    PostModel isiPost = new PostModel();
-                    isiPost.setJudul(post.getJudul());
-                    isiPost.setKategori(post.getKategori());
-                    isiPost.setIsi(post.getIsi());
-                    isiPost.setPostId(dataSnapshot1.getKey());
+                    MatkulModel matkul = dataSnapshot1.getValue(MatkulModel.class);
+                    MatkulModel matkulModel = new MatkulModel();
+                    matkulModel.setKodeMatkul(dataSnapshot1.getKey());
+                    matkulModel.setNama_matkul(matkul.getNama_matkul());
 
-                    postModelList.add(isiPost);
+                    takenMatkulList.add(matkulModel);
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -97,7 +94,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.e(FRAGMENT_TAG, "Failed to get Data" + databaseError.toException());
-                Log.e(FRAGMENT_TAG,"TES");
             }
         });
     }
@@ -105,6 +101,6 @@ public class HomeFragment extends Fragment {
 
     private void getAllListURL() {
         SessionController sessionController = new SessionController(getActivity());
-        LIST_POST_URL = "post/" + sessionController.getFakultas();
+        LIST_TAKEN_MATKUL_URL = "user/" + sessionController.getNIM() + "/mata_kuliah_diambil";
     }
 }

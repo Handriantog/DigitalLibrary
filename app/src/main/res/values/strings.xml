@@ -25,16 +25,13 @@
     </string-array>
 
     <!--Halaman LOGIN-->
-    <string name="edit_text_email">Email</string>
+    <string name="edit_text_nim">NIM</string>
     <string name="edit_text_password">Password</string>
     <string name="button_login">Login</string>
     <string name="text_view_register_link">Belum memiliki akun?\nDaftar disini</string>
 
-    <!--Halaman REGISTER-->
-    <string name="edit_text_nama">Nama</string>
-    <string name="edit_text_lokasi_kampus">Lokasi Kampus</string>
-    <string name="button_register">register</string>
-    <string name="text_view_fakultas">Pilih Fakultas</string>
+    <!--Halaman Home-->
+    <string name="text_view_header_text">Mata Kuliah Yang Diambil</string>
 
     <!--Halaman New PostModel-->
     <string name="edit_text_judul">Judul Post</string>

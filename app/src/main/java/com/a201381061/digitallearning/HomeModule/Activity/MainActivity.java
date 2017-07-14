@@ -26,6 +26,7 @@ import com.a201381061.digitallearning.HomeModule.Utility.FirebaseHomeUtil;
 import com.a201381061.digitallearning.LoginModule.Activity.LoginActivity;
 import com.a201381061.digitallearning.NewPostModule.Activity.NewPostActivity;
 import com.a201381061.digitallearning.R;
+import com.a201381061.digitallearning.Utils.SessionController;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -108,12 +109,12 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void loadHeader(){
-        fbUtil = new FirebaseHomeUtil();
+        SessionController sessionController = new SessionController(MainActivity.this);
         navHeader = navigationView.getHeaderView(0);
         textViewHeaderName = (TextView)navHeader.findViewById(R.id.drawer_header_name);
         imageViewImage = (ImageView)navHeader.findViewById(R.id.drawer_header_image);
 
-        textViewHeaderName.setText(fbUtil.getFirebaseUserName());
+        textViewHeaderName.setText(sessionController.getNama());
     }
 
     private void setUpNavigationMenu(){
@@ -140,7 +141,6 @@ public class MainActivity extends AppCompatActivity{
                         break;
                     case R.id.nav_logout:
                         navItemIndex = 4;
-                        fbUtil.signOut();
                         startActivity(new Intent(MainActivity.this, LoginActivity.class));
                         finish();
                         return true;

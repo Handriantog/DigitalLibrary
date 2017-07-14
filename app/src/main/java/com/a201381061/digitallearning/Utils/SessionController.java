@@ -3,8 +3,6 @@ package com.a201381061.digitallearning.Utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import java.util.HashMap;
-
 /**
  * Created by UserModel on 6/29/2017.
  */
@@ -31,14 +29,20 @@ public class SessionController {
     // UserModel name
     private static final String KEY_NAME = "nama";
 
-    // Email address
-    private static final String KEY_EMAIL = "email";
+    // NIM
+    private static final String KEY_NIM = "nim";
 
     // Fakultas UserModel
     private static final String KEY_FAKULTAS = "fakultas";
 
-    //Kampus UserModel
-    private static final String KEY_KAMPUS = "kampus";
+    //Jurusan UserModel
+    private static final String KEY_JURUSAN = "jurusan";
+
+    //Semester UserModel
+    private static final String KEY_SEMESTER = "semester";
+
+    //Angkatan UserModel
+    private static final String KEY_ANGKATAN = "angkatan";
 
     //First time open the app
     private static final String FIRST_TIME = "firstTime";
@@ -53,32 +57,38 @@ public class SessionController {
     /**
      * Create login session
      */
-    public void createLoginSession(String name, String email, String kampus, String fakultas) {
+    public void createLoginSession(String name, String nim, String jurusan, String fakultas, int angkatan, int semester) {
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
 
         // Storing name in pref
         editor.putString(KEY_NAME, name);
 
-        // Storing email in pref
-        editor.putString(KEY_EMAIL, email);
+        // Storing nim in pref
+        editor.putString(KEY_NIM, nim);
 
         // Storing kampus in pref
-        editor.putString(KEY_KAMPUS, kampus);
+        editor.putString(KEY_JURUSAN, jurusan);
 
         // Storing fakultas in pref
         editor.putString(KEY_FAKULTAS, fakultas);
+
+        // Storing angkatan in pref
+        editor.putInt(KEY_ANGKATAN, angkatan);
+
+        // Storing semester in pref
+        editor.putInt(KEY_SEMESTER, semester);
 
         // commit changes
         editor.commit();
     }
 
-    public boolean firstTimeOpen(){
-        return pref.getBoolean(FIRST_TIME,true);
+    public boolean firstTimeOpen() {
+        return pref.getBoolean(FIRST_TIME, true);
     }
 
-    public void openedForFirstTime(){
-        editor.putBoolean(FIRST_TIME,false);
+    public void openedForFirstTime() {
+        editor.putBoolean(FIRST_TIME, false);
         editor.commit();
     }
 
@@ -86,16 +96,24 @@ public class SessionController {
         return pref.getString(KEY_NAME, null);
     }
 
-    public String getEmail() {
-        return pref.getString(KEY_EMAIL, null);
+    public String getNIM() {
+        return pref.getString(KEY_NIM, null);
     }
 
     public String getFakultas() {
         return pref.getString(KEY_FAKULTAS, null);
     }
 
-    public String getKampus() {
-        return pref.getString(KEY_KAMPUS, null);
+    public String getJurusan() {
+        return pref.getString(KEY_JURUSAN, null);
+    }
+
+    public String getSemester() {
+        return pref.getString(KEY_SEMESTER, null);
+    }
+
+    public String getAngkatan() {
+        return pref.getString(KEY_ANGKATAN, null);
     }
 
     /**

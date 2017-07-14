@@ -6,21 +6,33 @@ package com.a201381061.digitallearning.Model;
 
 public class UserModel {
 
+    private String nim;
     private String nama;
-    private String email;
     private String password;
-    private String kampus;
     private String fakultas;
+    private String jurusan;
+    private int semester;
+    private int angkatan;
 
     public UserModel() {
     }
 
-    public UserModel(String nama, String email, String password, String kampus, String fakultas) {
+    public UserModel(String nama, String password, String fakultas, String jurusan, int semester, int angkatan,String nim) {
         this.nama = nama;
-        this.email = email;
         this.password = password;
-        this.kampus = kampus;
         this.fakultas = fakultas;
+        this.jurusan = jurusan;
+        this.semester = semester;
+        this.angkatan = angkatan;
+        this.nim = nim;
+    }
+
+    public String getNim() {
+        return nim;
+    }
+
+    public void setNim(String nim) {
+        this.nim = nim;
     }
 
     public String getNama() {
@@ -31,14 +43,6 @@ public class UserModel {
         this.nama = nama;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -47,19 +51,35 @@ public class UserModel {
         this.password = password;
     }
 
-    public String getKampus() {
-        return kampus;
-    }
-
-    public void setKampus(String kampus) {
-        this.kampus = kampus;
-    }
-
     public String getFakultas() {
         return fakultas;
     }
 
     public void setFakultas(String fakultas) {
         this.fakultas = fakultas;
+    }
+
+    public String getJurusan() {
+        return jurusan;
+    }
+
+    public void setJurusan(String jurusan) {
+        this.jurusan = jurusan;
+    }
+
+    public int getSemester() {
+        return semester;
+    }
+
+    public void setSemester(int semester) {
+        this.semester = semester;
+    }
+
+    public int getAngkatan() {
+        return angkatan;
+    }
+
+    public void setAngkatan(int angkatan) {
+        this.angkatan = angkatan;
     }
 }

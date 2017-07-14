@@ -7,7 +7,7 @@ import android.os.Bundle;
 
 import com.a201381061.digitallearning.AppIntroModule.Activity.IntroActivity;
 import com.a201381061.digitallearning.HomeModule.Activity.MainActivity;
-import com.a201381061.digitallearning.LoginModule.Utility.FirebaseAuthUtil;
+import com.a201381061.digitallearning.LoginModule.Utility.FirebaseSignInUtil;
 import com.a201381061.digitallearning.R;
 import com.a201381061.digitallearning.Utils.SessionController;
 
@@ -21,7 +21,7 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-        userExist = new FirebaseAuthUtil().checkIfUserExist();
+        final SessionController sessionController = new SessionController(SplashScreen.this);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -30,7 +30,7 @@ public class SplashScreen extends AppCompatActivity {
                     startActivity(i);
                     finish();
                 }else{
-                    if(userExist){
+                    if(sessionController.isLoggedIn()){
                         Intent i = new Intent(SplashScreen.this, MainActivity.class);
                         startActivity(i);
                         finish();

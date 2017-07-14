@@ -2,12 +2,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.a201381061.digitallearning.HomeModule.Fragment.HomeFragment"
-    android:padding="@dimen/activity_horizontal_margin">
+    android:padding="@dimen/activity_horizontal_margin"
+    tools:context="com.a201381061.digitallearning.HomeModule.Fragment.HomeFragment">
 
-    <android.support.v7.widget.RecyclerView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recyclerViewPost"/>
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_view_header_text"
+            android:textSize="20sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewPost"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
 
 </FrameLayout>

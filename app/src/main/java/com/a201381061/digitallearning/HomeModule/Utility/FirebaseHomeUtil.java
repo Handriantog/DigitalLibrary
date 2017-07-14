@@ -11,28 +11,12 @@ import com.google.firebase.database.DatabaseReference;
 public class FirebaseHomeUtil {
 
     private static String TAG = "FirebaseHomeUtil";
-    private FirebaseAuth mAuth;
-    private FirebaseUser mUser;
-    private DatabaseReference firebaseDatabase;
+   private DatabaseReference firebaseDatabase;
 
     public FirebaseHomeUtil(){
-        mAuth = FirebaseAuth.getInstance();
-    }
 
-    public FirebaseUser getFirebaseUser(){
-        mUser = mAuth.getCurrentUser();
-        return mUser;
-    }
-
-    public String getFirebaseUserName(){
-        String name;
-        name = mAuth.getCurrentUser().getDisplayName();
-        return name;
     }
 
 
-    public void signOut(){
-        mAuth.signOut();
-    }
 
 }
