@@ -3,6 +3,7 @@
     package="com.a201381061.digitallearning">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -22,7 +23,11 @@
         <activity android:name=".NewPostModule.Activity.NewPostActivity" />
         <activity android:name=".PostModule.Activity.InsidePostActivity" />
         <activity android:name=".AppIntroModule.Activity.IntroActivity" />
-        <activity android:name=".AllMateriModule.Activity.AllMateriActivity"></activity>
+        <activity android:name=".AllMateriModule.Activity.AllMateriActivity" />
+        <activity
+            android:name=".AllMatkulModule.Activity.AllMatkulActivity"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
     </application>
 
 </manifest>

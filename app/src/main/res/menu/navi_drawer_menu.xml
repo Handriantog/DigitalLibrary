@@ -7,9 +7,13 @@
             android:icon="@drawable/ic_home_black_24dp"
             android:title="@string/nav_home" />
         <item
-            android:id="@+id/nav_new_post"
+            android:id="@+id/nav_forum"
             android:icon="@drawable/ic_forum_black_24dp"
-            android:title="@string/nav_new_post" />
+            android:title="@string/nav_forum" />
+        <item
+            android:id="@+id/nav_fakultas"
+            android:icon="@drawable/ic_school_black_24dp"
+            android:title="@string/nav_fakultas_lain" />
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_settings_black_24dp"
@@ -32,5 +36,5 @@
     <item
         android:id="@+id/menu_none"
         android:title=""
-        android:visible="false"/>
+        android:visible="false" />
 </menu>

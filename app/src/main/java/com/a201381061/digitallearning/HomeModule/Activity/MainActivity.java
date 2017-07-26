@@ -21,14 +21,17 @@ import android.widget.TextView;
 
 import com.a201381061.digitallearning.HomeModule.Fragment.AboutUsFragment;
 import com.a201381061.digitallearning.HomeModule.Fragment.HomeFragment;
+import com.a201381061.digitallearning.HomeModule.Fragment.SearchFakultasFragment;
 import com.a201381061.digitallearning.HomeModule.Fragment.SettingsFragment;
+import com.a201381061.digitallearning.HomeModule.Fragment.UserPostFragment;
 import com.a201381061.digitallearning.HomeModule.Utility.FirebaseHomeUtil;
+import com.a201381061.digitallearning.HomeModule.Utility.UserPostAdapter;
 import com.a201381061.digitallearning.LoginModule.Activity.LoginActivity;
 import com.a201381061.digitallearning.NewPostModule.Activity.NewPostActivity;
 import com.a201381061.digitallearning.R;
 import com.a201381061.digitallearning.Utils.SessionController;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
     //Navigation Drawer
     private NavigationView navigationView;
@@ -38,6 +41,8 @@ public class MainActivity extends AppCompatActivity{
 
     //TAG FRAGMENT
     private static final String TAG_HOME = "home";
+    private static final String TAG_FORUM = "forum";
+    private static final String TAG_FAKULTAS = "fakultas";
     private static final String TAG_ABOUT = "about";
     private static final String TAG_SETTINGS = "settings";
     public static String CURRENT_TAG = TAG_HOME;
@@ -79,27 +84,27 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    private void castingElement(){
-        fab = (FloatingActionButton)findViewById(R.id.fab);
+    private void castingElement() {
+        fab = (FloatingActionButton) findViewById(R.id.fab);
     }
 
-    private void fabClicked(){
+    private void fabClicked() {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,NewPostActivity.class));
+                startActivity(new Intent(MainActivity.this, NewPostActivity.class));
             }
         });
     }
 
-    private void setUpNavigationDrawer(){
+    private void setUpNavigationDrawer() {
         activityTiles = getResources().getStringArray(R.array.nav_item_activity_titles);
 
-        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        navigationView = (NavigationView)findViewById(R.id.nav_view);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
 
         //set data di header
         loadHeader();
@@ -108,39 +113,44 @@ public class MainActivity extends AppCompatActivity{
         setUpNavigationMenu();
     }
 
-    private void loadHeader(){
+    private void loadHeader() {
         SessionController sessionController = new SessionController(MainActivity.this);
         navHeader = navigationView.getHeaderView(0);
-        textViewHeaderName = (TextView)navHeader.findViewById(R.id.drawer_header_name);
-        imageViewImage = (ImageView)navHeader.findViewById(R.id.drawer_header_image);
+        textViewHeaderName = (TextView) navHeader.findViewById(R.id.drawer_header_name);
+        imageViewImage = (ImageView) navHeader.findViewById(R.id.drawer_header_image);
 
         textViewHeaderName.setText(sessionController.getNama());
     }
 
-    private void setUpNavigationMenu(){
+    private void setUpNavigationMenu() {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.nav_home:
                         navItemIndex = 0;
                         CURRENT_TAG = TAG_HOME;
                         break;
-                    case R.id.nav_new_post:
-                        navigationView.setCheckedItem(R.id.menu_none);
-                        startActivity(new Intent(MainActivity.this, NewPostActivity.class));
-                        drawerLayout.closeDrawers();
-                        return true;
-                    case R.id.nav_settings:
+                    case R.id.nav_forum:
+                        navItemIndex = 1;
+                        CURRENT_TAG = TAG_FORUM;
+                        break;
+                    case R.id.nav_fakultas:
                         navItemIndex = 2;
+                        CURRENT_TAG = TAG_FAKULTAS;
+                        break;
+                    case R.id.nav_settings:
+                        navItemIndex = 3;
                         CURRENT_TAG = TAG_SETTINGS;
                         break;
                     case R.id.nav_about:
-                        navItemIndex = 3;
+                        navItemIndex = 4;
                         CURRENT_TAG = TAG_ABOUT;
                         break;
                     case R.id.nav_logout:
                         navItemIndex = 4;
+                        SessionController sessionController = new SessionController(MainActivity.this);
+                        sessionController.logoutUser();
                         startActivity(new Intent(MainActivity.this, LoginActivity.class));
                         finish();
                         return true;
@@ -159,7 +169,7 @@ public class MainActivity extends AppCompatActivity{
                 loadHomeFragment();
 
                 return true;
-                }
+            }
         });
 
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, toolbar, R.string.openDrawer, R.string.closeDrawer) {
@@ -240,15 +250,22 @@ public class MainActivity extends AppCompatActivity{
                 // home
                 HomeFragment homeFragment = new HomeFragment();
                 return homeFragment;
+            case 1:
+                //forum
+                UserPostFragment userPostFragment = new UserPostFragment();
+                return userPostFragment;
             case 2:
+                //fakultas
+                SearchFakultasFragment searchFakultasFragment = new SearchFakultasFragment();
+                return searchFakultasFragment;
+            case 3:
                 // settings
                 SettingsFragment settingsFragment = new SettingsFragment();
                 return settingsFragment;
-            case 3:
+            case 4:
                 // about us fragment
                 AboutUsFragment aboutUsFragment = new AboutUsFragment();
                 return aboutUsFragment;
-
             default:
                 return new HomeFragment();
         }
@@ -258,9 +275,9 @@ public class MainActivity extends AppCompatActivity{
         navigationView.getMenu().getItem(navItemIndex).setChecked(true);
     }
 
-    private void setToolbarTitle(){
+    private void setToolbarTitle() {
         getSupportActionBar().setTitle(activityTiles[navItemIndex]);
-}
+    }
 
     // show or hide the fab
     private void toggleFab() {

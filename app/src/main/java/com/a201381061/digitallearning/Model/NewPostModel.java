@@ -8,7 +8,7 @@ public class NewPostModel {
 
     private String judul;
     private String isi;
-    private String userId;
+    private String nim;
     private String kategori;
     private int upvote;
     private int report;
@@ -16,7 +16,7 @@ public class NewPostModel {
     public NewPostModel(String judul, String isi, String userId,String kategori,int upvote,int report) {
         this.judul = judul;
         this.isi = isi;
-        this.userId = userId;
+        this.nim = userId;
         this.kategori = kategori;
         this.upvote = upvote;
         this.report = report;
@@ -39,12 +39,12 @@ public class NewPostModel {
         this.isi = isi;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getNim() {
+        return nim;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setNim(String nim) {
+        this.nim = nim;
     }
 
     public String getKategori() {

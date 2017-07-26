@@ -6,33 +6,33 @@ package com.a201381061.digitallearning.Model;
 
 public class CommentModel {
 
-    private String idUser;
-    private String namaUser;
+    private String nim;
+    private String namaMahasiswa;
     private String isiComment;
 
     public CommentModel() {
     }
 
-    public CommentModel(String idUser, String namaUser, String isiComment) {
-        this.idUser = idUser;
-        this.namaUser = namaUser;
+    public CommentModel(String nim, String namaMahasiswa, String isiComment) {
+        this.nim = nim;
+        this.namaMahasiswa = namaMahasiswa;
         this.isiComment = isiComment;
     }
 
-    public String getIdUser() {
-        return idUser;
+    public String getNim() {
+        return nim;
     }
 
-    public void setIdUser(String idUser) {
-        this.idUser = idUser;
+    public void setNim(String nim) {
+        this.nim = nim;
     }
 
-    public String getNamaUser() {
-        return namaUser;
+    public String getNamaMahasiswa() {
+        return namaMahasiswa;
     }
 
-    public void setNamaUser(String namaUser) {
-        this.namaUser = namaUser;
+    public void setNamaMahasiswa(String namaMahasiswa) {
+        this.namaMahasiswa = namaMahasiswa;
     }
 
     public String getIsiComment() {

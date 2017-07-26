@@ -23,22 +23,21 @@ public class FirebaseSeePostUtil {
 
     private static final String TAG = "FirebaseSeePostUtil";
     private DatabaseReference firebaseDatabase;
-    private FirebaseUser firebaseUser;
+    private SessionController sessionController;
     private Context context;
 
 
     public FirebaseSeePostUtil(Context context){
         this.context = context;
+        sessionController = new SessionController(context);
     }
 
-    private String getUserId(){
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        return firebaseUser.getUid();
+    private String getNim(){
+        return sessionController.getNIM();
     }
 
     private String getUserName(){
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        return firebaseUser.getDisplayName();
+        return sessionController.getNama();
     }
 
     private void databaseSetup(){
@@ -48,9 +47,7 @@ public class FirebaseSeePostUtil {
     public void addNewComment(String isi,String url){
         databaseSetup();
 
-        Log.e(TAG,getUserId());
-
-        CommentModel comment = new CommentModel(getUserId(),getUserName(),isi);
+        CommentModel comment = new CommentModel(getNim(),getUserName(),isi);
 
         String idComment = firebaseDatabase.push().getKey();
         firebaseDatabase.child(url).child(idComment).setValue(comment, new DatabaseReference.CompletionListener() {

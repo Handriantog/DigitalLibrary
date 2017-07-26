@@ -11,7 +11,7 @@ public class PostModel implements Serializable {
     private String judul;
     private String kategori;
     private String isi;
-    private String userId;
+    private String nim;
     private String postId;
 
     public PostModel() {
@@ -21,7 +21,7 @@ public class PostModel implements Serializable {
         this.judul = judul;
         this.kategori = kategori;
         this.isi = isi;
-        this.userId = userId;
+        this.nim = userId;
         this.postId = postId;
     }
 
@@ -49,12 +49,12 @@ public class PostModel implements Serializable {
         this.isi = isi;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getNim() {
+        return nim;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setNim(String nim) {
+        this.nim = nim;
     }
 
     public String getPostId() {

@@ -10,7 +10,8 @@
 
     <!-- Navigation Drawer menu labels -->
     <string name="nav_home">Home</string>
-    <string name="nav_new_post">Add New Post</string>
+    <string name="nav_forum">Forum Mahasiswa</string>
+    <string name="nav_fakultas_lain">Fakultas Lain</string>
     <string name="nav_settings">Settings</string>
     <string name="nav_about_us">About Us</string>
     <string name="nav_logout">Logout</string>
@@ -18,7 +19,8 @@
     <!-- Toolbar titles when navigation menu item is selected -->
     <string-array name="nav_item_activity_titles">
         <item>Home</item>
-        <item>Add New Post</item>
+        <item>Forum Mahasiswa</item>
+        <item>Fakultas Lain</item>
         <item>Settings</item>
         <item>About Us</item>
         <item>Logout</item>
@@ -32,6 +34,12 @@
 
     <!--Halaman Home-->
     <string name="text_view_header_text">Mata Kuliah Yang Diambil</string>
+
+    <!--Halaman Search Fakultas-->
+    <string name="text_view_list_fakultas">List Fakultas</string>
+
+    <!--Halaman Search Matkul-->
+    <string name="edit_text_search_matkul">Cari Mata Kuliah</string>
 
     <!--Halaman New PostModel-->
     <string name="edit_text_judul">Judul Post</string>

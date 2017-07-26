@@ -1,7 +1,6 @@
 package com.a201381061.digitallearning.PostModule.Activity;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,7 +12,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.a201381061.digitallearning.Model.CommentModel;
 import com.a201381061.digitallearning.Model.PostModel;
@@ -69,6 +67,7 @@ public class InsidePostActivity extends BaseActivity {
         setUpDatabase();
         setUpPostButton();
     }
+
 
     private void castingElement() {
         judulPost = (TextView) findViewById(R.id.textViewJudulInside);
@@ -139,8 +138,8 @@ public class InsidePostActivity extends BaseActivity {
                     Log.e(ACTIVITY_TAG, dataSnapshot.getValue().toString());
                     CommentModel allComment = dataSnapshot1.getValue(CommentModel.class);
                     CommentModel comment = new CommentModel();
-                    comment.setNamaUser(allComment.getNamaUser());
-                    comment.setIdUser(allComment.getIdUser());
+                    comment.setNamaMahasiswa(allComment.getNamaMahasiswa());
+                    comment.setNim(allComment.getNim());
                     comment.setIsiComment(allComment.getIsiComment());
 
                     listComment.add(comment);

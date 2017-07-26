@@ -122,6 +122,7 @@ public class SessionController {
     public void logoutUser() {
         // Clearing all data from Shared Preferences
         editor.clear();
+        editor.putBoolean(FIRST_TIME, false);
         editor.commit();
     }
 

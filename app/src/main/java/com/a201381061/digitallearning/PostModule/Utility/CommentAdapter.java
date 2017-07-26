@@ -1,7 +1,6 @@
 package com.a201381061.digitallearning.PostModule.Utility;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -10,11 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.a201381061.digitallearning.Model.CommentModel;
-import com.a201381061.digitallearning.Model.PostModel;
-import com.a201381061.digitallearning.PostModule.Activity.InsidePostActivity;
 import com.a201381061.digitallearning.R;
 
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -45,7 +41,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyHoder>
         CommentModel commentModel = listComment.get(position);
 
         Log.e("TAG TES", commentModel.getIsiComment());
-        holder.nama.setText(commentModel.getNamaUser());
+        holder.nama.setText(commentModel.getNamaMahasiswa());
         holder.isi.setText(commentModel.getIsiComment());
 
     }
@@ -55,16 +51,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyHoder>
     public int getItemCount() {
         return listComment.size();
     }
-
-    /*@Override
-    public int getItemViewType(int position) {
-        if(.get(position).isHeader)
-            return VIEW_TYPES.Header;
-        else if(items.get(position).isFooter)
-            return VIEW_TYPES.Footer;
-        else
-            return VIEW_TYPES.Normal;
-    }*/
 
     class MyHoder extends RecyclerView.ViewHolder {
         TextView nama, isi;
@@ -78,8 +64,4 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyHoder>
         }
     }
 
-    private class VIEW_TYPES {
-        public static final int Header = 1;
-        public static final int Normal = 2;
-    }
 }

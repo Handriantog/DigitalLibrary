@@ -1,7 +1,11 @@
 package com.a201381061.digitallearning.AllMateriModule.Utility;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -9,12 +13,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.a201381061.digitallearning.Model.MateriModel;
 import com.a201381061.digitallearning.R;
+import com.a201381061.digitallearning.Utils.SessionController;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,10 +32,16 @@ public class AllMateriAdapter extends RecyclerView.Adapter<AllMateriAdapter.MyHo
     private List<MateriModel> listMateri = new ArrayList<>();
     private Context context;
     private int jumlahMateri;
+    private String fakultas;
+    private String kodeMatkul;
 
-    public AllMateriAdapter(List<MateriModel> list, Context context) {
+    private static String TAG = "AllMateriAdapter";
+
+    public AllMateriAdapter(List<MateriModel> list, Context context,String fakultas,String kodeMatkul) {
         listMateri = list;
         this.context = context;
+        this.fakultas = fakultas;
+        this.kodeMatkul = kodeMatkul;
     }
 
     @Override
@@ -84,11 +98,68 @@ public class AllMateriAdapter extends RecyclerView.Adapter<AllMateriAdapter.MyHo
         }
     }
 
+    private String getFileLocation(){
+        String fileLocation = Environment.getExternalStorageDirectory()
+                + "/DigitalLibrary/"+new SessionController(context).getFakultas()+"/"+kodeMatkul+"/";
+        return fileLocation;
+    }
+
+    public boolean checkIfFileExist(String fileLocation){
+        File file = new File(fileLocation);
+        String loc = file.getAbsolutePath();
+        Log.d("CHECK WOI",loc);
+        if(file.exists()){
+            Log.d(TAG,"File Exist");
+            return true;
+        }else{
+            Log.d(TAG,"File not exist");
+            return false;
+        }
+    }
+
+    private void openSavedFile(String fileLocation){
+        File file = new File(fileLocation);
+
+        MimeTypeMap myMime = MimeTypeMap.getSingleton();
+        Intent newIntent = new Intent(Intent.ACTION_VIEW);
+        String mimeType = myMime.getMimeTypeFromExtension(fileExt(fileLocation).substring(1));
+        newIntent.setDataAndType(Uri.fromFile(file),mimeType);
+        newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        try {
+            context.startActivity(newIntent);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(context, "No handler for this type of file.", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private String fileExt(String url) {
+        if (url.indexOf("?") > -1) {
+            url = url.substring(0, url.indexOf("?"));
+        }
+        if (url.lastIndexOf(".") == -1) {
+            return null;
+        } else {
+            String ext = url.substring(url.lastIndexOf(".") + 1);
+            if (ext.indexOf("%") > -1) {
+                ext = ext.substring(0, ext.indexOf("%"));
+            }
+            if (ext.indexOf("/") > -1) {
+                ext = ext.substring(0, ext.indexOf("/"));
+            }
+            return ext.toLowerCase();
+
+        }
+    }
+
     private void setMateri1Link(AllMateriAdapter.MyHoder holder,final MateriModel model){
         holder.materi1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createDialog(model,1);
+                if(checkIfFileExist(getFileLocation()+model.getNama_materi1())){
+                    openSavedFile(getFileLocation()+model.getNama_materi1());
+                }else{
+                    createDialog(model,1);
+                }
             }
         });
     }
@@ -97,7 +168,11 @@ public class AllMateriAdapter extends RecyclerView.Adapter<AllMateriAdapter.MyHo
         holder.materi2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createDialog(model,2);
+                if(checkIfFileExist(getFileLocation()+model.getNama_materi2())){
+                    openSavedFile(getFileLocation()+model.getNama_materi2());
+                }else{
+                    createDialog(model,2);
+                }
             }
         });
     }
@@ -106,7 +181,11 @@ public class AllMateriAdapter extends RecyclerView.Adapter<AllMateriAdapter.MyHo
         holder.materi3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createDialog(model,3);
+                if(checkIfFileExist(getFileLocation()+model.getNama_materi3())){
+                    openSavedFile(getFileLocation()+model.getNama_materi3());
+                }else{
+                    createDialog(model,3);
+                }
             }
         });
     }
@@ -115,7 +194,11 @@ public class AllMateriAdapter extends RecyclerView.Adapter<AllMateriAdapter.MyHo
         holder.materi4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createDialog(model,4);
+                if(checkIfFileExist(getFileLocation()+model.getNama_materi4())){
+                    openSavedFile(getFileLocation()+model.getNama_materi4());
+                }else{
+                    createDialog(model,4);
+                }
             }
         });
     }
@@ -132,12 +215,13 @@ public class AllMateriAdapter extends RecyclerView.Adapter<AllMateriAdapter.MyHo
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(context,"Downloading File",Toast.LENGTH_SHORT).show();
                         if(nomorMateri==1){
+                            new DownloadFileFromURL(context,model.getNama_materi1(),fakultas,kodeMatkul).execute(model.getUrl_file1());
                         }else if(nomorMateri==2){
-                            Toast.makeText(context,model.getUrl_file2(),Toast.LENGTH_SHORT).show();
+                            new DownloadFileFromURL(context,model.getNama_materi2(),fakultas,kodeMatkul).execute(model.getUrl_file2());
                         }else if(nomorMateri==3){
-                            Toast.makeText(context,model.getUrl_file3(),Toast.LENGTH_SHORT).show();
+                            new DownloadFileFromURL(context,model.getNama_materi3(),fakultas,kodeMatkul).execute(model.getUrl_file3());
                         }else if(nomorMateri==4){
-                            Toast.makeText(context,model.getUrl_file4(),Toast.LENGTH_SHORT).show();
+                            new DownloadFileFromURL(context,model.getNama_materi4(),fakultas,kodeMatkul).execute(model.getUrl_file4());
                         }
                         dialog.dismiss();
                     }
@@ -155,7 +239,6 @@ public class AllMateriAdapter extends RecyclerView.Adapter<AllMateriAdapter.MyHo
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
 
     @Override
     public int getItemCount() {
@@ -176,4 +259,6 @@ public class AllMateriAdapter extends RecyclerView.Adapter<AllMateriAdapter.MyHo
             cardView = (CardView) itemView.findViewById(R.id.cardViewMateriKuliah);
         }
     }
+
+
 }

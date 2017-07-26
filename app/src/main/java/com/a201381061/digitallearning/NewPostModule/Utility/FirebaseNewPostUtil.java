@@ -29,11 +29,6 @@ public class FirebaseNewPostUtil {
         this.context = context;
     }
 
-    private String getUserId(){
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        return firebaseUser.getUid();
-    }
-
     private String getFakultas(){
         SessionController sessionController = new SessionController(context);
         return  sessionController.getFakultas();
@@ -43,10 +38,15 @@ public class FirebaseNewPostUtil {
         firebaseDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
+    private String getNim(){
+        SessionController sessionController = new SessionController(context);
+        return sessionController.getNIM();
+    }
+
     public void addNewPost(String judul,String kategori,String isi){
         databaseSetup();
 
-        NewPostModel newPost = new NewPostModel(judul,isi,getUserId(),kategori,0,0);
+        NewPostModel newPost = new NewPostModel(judul,isi,getNim(),kategori,0,0);
         String idPost = firebaseDatabase.push().getKey();
         Log.e("ID POST",idPost);
         firebaseDatabase.child(new Constant().DB_POST).child(getFakultas()).child(idPost).setValue(newPost, new DatabaseReference.CompletionListener() {
