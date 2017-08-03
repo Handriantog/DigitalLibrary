@@ -1,18 +1,20 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/activity_horizontal_margin"
     tools:context="com.a201381061.digitallearning.HomeModule.Fragment.HomeFragment">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/textAtas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:text="@string/text_view_header_text"
             android:textSize="20sp" />
 
@@ -21,6 +23,127 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-    </LinearLayout>
+        <com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader
+            android:id="@+id/recyclerViewHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/appBar"
+            android:layout_gravity="center_horizontal|top"
+            android:layout_marginTop="@dimen/activity_horizontal_margin">
+
+            <LinearLayout
+                android:id="@+id/linearCardPost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:elevation="3dp"
+                    android:paddingBottom="@dimen/activity_vertical_margin"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:paddingTop="@dimen/activity_vertical_margin"
+                    app:cardBackgroundColor="@color/cardBackground"
+                    app:cardCornerRadius="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textViewKategoriInside"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/activity_vertical_margin"
+                            android:layout_marginRight="@dimen/activity_vertical_margin"
+                            android:layout_marginTop="@dimen/activity_vertical_margin"
+                            android:text="Kategori"
+                            android:textColor="@color/teksPutih" />
+
+                        <TextView
+                            android:id="@+id/textViewJudulInside"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/activity_vertical_margin"
+                            android:layout_marginRight="@dimen/activity_vertical_margin"
+                            android:layout_marginTop="10dp"
+                            android:text="Judul"
+                            android:textColor="@color/teksPutih"
+                            android:textSize="30sp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="@dimen/activity_vertical_margin"
+                            android:layout_marginRight="@dimen/activity_vertical_margin"
+                            android:layout_marginTop="5dp"
+                            android:background="@color/garisDivider" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/activity_vertical_margin"
+                            android:layout_marginRight="@dimen/activity_vertical_margin"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imageViewIconUserInside"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@mipmap/ic_launcher" />
+
+                            <TextView
+                                android:id="@+id/textViewNamaUserInside"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="5dp"
+                                android:text="Nama User" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="@dimen/activity_vertical_margin"
+                            android:layout_marginRight="@dimen/activity_vertical_margin"
+                            android:layout_marginTop="5dp"
+                            android:background="@color/garisDivider" />
+
+                        <TextView
+                            android:id="@+id/textViewIsiInside"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="50dp"
+                            android:layout_marginLeft="@dimen/activity_vertical_margin"
+                            android:layout_marginRight="@dimen/activity_vertical_margin"
+                            android:layout_marginTop="@dimen/activity_vertical_margin"
+                            android:text="Isi"
+                            android:textColor="@color/teksPutih" />
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <TextView
+                    android:id="@+id/textKecil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/activity_vertical_margin"
+                    android:text=" "
+                    android:textSize="30sp" />
+
+            </LinearLayout>
+
+        </com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader>
+
+    </RelativeLayout>
 
 </FrameLayout>
